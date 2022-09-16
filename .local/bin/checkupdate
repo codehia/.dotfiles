@@ -1,0 +1,4 @@
+#!/bin/bash
+
+#pacman -S pacman-contrib to make it work
+checkupdates | wc -l
