@@ -103,8 +103,8 @@ alias tree='tree -a -I .git'
 alias update='sudo pacman -Syyu'
 alias yupdate='yay -Syyu'
 alias dotfiles='$(which git) --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-# Add flags to existing aliases.
-#alias ls="${aliases[ls]:-ls} -A"
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
 
 # Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
 setopt glob_dots     # no special treatment for file names with a leading dot
