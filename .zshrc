@@ -41,7 +41,6 @@ zstyle ':z4h:ssh:*'                   enable 'no'
 # Send these files over to the remote host when connecting over SSH to the
 # enabled hosts.
 zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'
-
 # Clone additional Git repositories from GitHub.
 #
 # This doesn't do anything apart from cloning the repository and keeping it
@@ -55,9 +54,9 @@ z4h install agkozak/zsh-z || return
 # is fully initialized. Everything that requires user interaction or can
 # perform network I/O must be done above. Everything else is best done below.
 #
-# POSTEDIT=$'\n\n\e[2A'
+POSTEDIT=$'\n\n\e[2A'
 #
-POSTEDIT=$'\n\e[A'
+# POSTEDIT=$'\n\e[A'
 z4h init || return
 
 # Extend PATH.
@@ -105,17 +104,11 @@ alias yupdate='yay -Syyu'
 alias dotfiles='$(which git) --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
+alias install='sudo pacman -S'
+alias uninstall='sudo pacman -Rns'
+alias yinstall='yay -S'
+alias yuninstall='yay -Rnsu'
 
 # Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
 setopt glob_dots     # no special treatment for file names with a leading dot
 setopt no_auto_menu  # require an extra TAB press to open the completion menu
-
-# fnm
-export PATH=/home/deus/.fnm:$PATH
-eval "`fnm env`"
-
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv virtualenv-init -)"
-
-[ -f "/home/deus/.ghcup/env" ] && source "/home/deus/.ghcup/env" # ghcup-env
