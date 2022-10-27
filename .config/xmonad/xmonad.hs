@@ -87,12 +87,12 @@ myStartupHook :: X ()
 myStartupHook = do
     spawnOnce "picom --experimental-backends &"
     spawnOnce "feh --bg-fill --randomize ~/.wallpapers/* &"  -- feh set random wallpaper
-    spawnOnce "nm-applet &"
-    -- spawnOnce "dunst &"
     spawnOnce "trayer --iconspacing 5 --edge top --align right --widthtype request --heighttype pixel --padding 5 --SetDockType true --SetPartialStrut false --expand true --monitor primary --transparent true --alpha 0 --tint 0x282c34  --height 22"
     setDefaultCursor xC_left_ptr -- Set cursor theme
     -- setWMName "LG3D"
     -- spawnOnce "canberra-gtk-play -i service-login -d 'Login' &" -- add a login sound
+    -- spawnOnce "nm-applet &"
+    -- spawnOnce "dunst &"
 
 
 --------------------------------------
@@ -250,6 +250,23 @@ withNthWorkspaceScreen job wnum = do
          (w : _) -> windows $ job w
          []      -> return ()
 
+manageZoomHook =
+  composeAll $
+    [ (className =? zoomClassName) <&&> shouldFloat <$> title --> doFloat,
+      (className =? zoomClassName) <&&> shouldSink <$> title --> doSink
+    ]
+  where
+    zoomClassName = "zoom"
+    tileTitles =
+      [ "Zoom - Free Account", -- main window
+        "Zoom - Licensed Account", -- main window
+        "Zoom", -- meeting window on creation
+        "Zoom Meeting" -- meeting window shortly after creation
+      ]
+    shouldFloat title = title `notElem` tileTitles
+    shouldSink title = title `elem` tileTitles
+    doSink = (ask >>= doF . W.sink) <+> doF W.swapDown
+
 main :: IO()
 main = do
     nScreens <- countScreens
@@ -262,7 +279,8 @@ main = do
          normalBorderColor = myNormalBorderColor,
          focusedBorderColor = myFocusedBorderColor,
          startupHook = myStartupHook,
-         workspaces = withScreens nScreens myWorkspaces
+         workspaces = withScreens nScreens myWorkspaces,
+         manageHook = manageZoomHook
          } 
         `additionalKeysP` myKeys
 

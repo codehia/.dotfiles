@@ -2,4 +2,4 @@
 Description=Change wallpapers using wallpaperscript.sh
 
 [Service]
-ExecStart="/home/deus/.local/bin/wallpaperscript.sh"
+ExecStart="/home/deus/.local/bin/wallpaper-change.sh"
