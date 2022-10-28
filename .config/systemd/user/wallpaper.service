@@ -1,5 +1,11 @@
 [Unit]
-Description=Change wallpapers using wallpaperscript.sh
+Description=Random wallpaper with feh
 
 [Service]
-ExecStart="/home/deus/.local/bin/wallpaper-change.sh"
+Type=oneshot
+Environment=DISPLAY=:0 
+; EnvironmentFile=%h/.wallpapers
+ExecStart=/bin/bash -c '/usr/bin/feh --bg-scale --randomize /home/deus/.wallpapers'
+
+[Install]
+WantedBy=default.target
