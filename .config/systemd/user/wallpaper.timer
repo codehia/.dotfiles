@@ -1,9 +1,12 @@
 [Unit]
-Description=Random wallpaper with feh
+Description=Runs wallpaperscript every 10 minutes
 
 [Timer]
-OnUnitActiveSec=10m
+# Time to wait after booting before we run first time
+OnBootSec=1min
+# Time between running each consecutive time
+OnUnitActiveSec=10min
 Unit=wallpaper.service
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
