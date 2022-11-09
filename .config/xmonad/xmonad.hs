@@ -176,6 +176,8 @@ myKeys = [
  ,("M-b", spawn myBrowser)                                             -- (Alt + b)
  ,("M-n", spawn myEditor)                                              -- (Alt + n)
  ,("M-f", spawn myFileManager)                                         -- (Alt + f)
+ ,("M-p", spawn "rofi -show drun")                                     -- (Alt + p)
+ ,("M-S-p", spawn "rofi -show window")                                   -- (Alt + x)
  ] 
  -- ++ [ (otherModMasks ++ "M-" ++ [key], action tag)
  --      | (tag, key)  <- zip myWorkspaces "123456789"
