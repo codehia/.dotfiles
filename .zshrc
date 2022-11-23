@@ -106,6 +106,7 @@ alias install='sudo pacman -S'
 alias uninstall='sudo pacman -Rns'
 alias yinstall='yay -S'
 alias yuninstall='yay -Rnsu'
+alias fb='tmuxp load fjapi'
 
 # Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
 setopt glob_dots     # no special treatment for file names with a leading dot
@@ -118,6 +119,13 @@ eval "$(pyenv virtualenv-init -)"
 
 # fnm
 export PATH=/home/deus/.fnm:$PATH
+export GOPATH=$HOME/projects/go
 eval "`fnm env`"
 
 [ -f "/home/deus/.ghcup/env" ] && source "/home/deus/.ghcup/env" # ghcup-env
+export BAT_THEME="Catppuccin-mocha"
+
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
