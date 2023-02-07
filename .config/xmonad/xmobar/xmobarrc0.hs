@@ -51,5 +51,5 @@ Config { font    = "xft:JetBrainsMonoMedium Nerd Font:weight=bold:pixelsize=12:a
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "<fn=1>  </fn>%_XMONAD_LOG_1%}%date%{ %disku% %memory% %cpu% <fc=#D08770><fn=1> </fn>%checkupdate%</fc> %battery%%trayerpad%"
+       , template = "<fn=1>  </fn>%_XMONAD_LOG_1%}%date%{ %disku% %memory% %cpu% <fc=#D08770><fn=1> </fn>%checkupdate%</fc> %trayerpad%"
 }

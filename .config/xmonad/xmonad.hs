@@ -1,8 +1,6 @@
 --------------------------------------
 -- IMPORT PACKAGES
 --------------------------------------
-
--- Base
 import XMonad
 import qualified XMonad.StackSet as W
 import XMonad.Layout.Renamed (renamed, Rename (Replace))
@@ -21,12 +19,12 @@ import qualified XMonad.Layout.ToggleLayouts as T (toggleLayouts, ToggleLayout(T
 import XMonad.Actions.CycleWS
 import XMonad.Actions.CycleWindows
 import XMonad.Actions.GroupNavigation
--- import qualified Data.Map as M
+import qualified Data.Map as Map
 
 
 import XMonad.Actions.WithAll (killAll, sinkAll)
-import XMonad.Actions.CopyWindow (copyToAll, killAllOtherCopies, copy, copiesOfOn, taggedWindows)
-import XMonad.Util.EZConfig (additionalKeysP, additionalKeys)
+import XMonad.Actions.CopyWindow (copyToAll, killAllOtherCopies)
+import XMonad.Util.EZConfig (additionalKeysP)
 
 import XMonad.Util.SpawnOnce (spawnOnce)
 import XMonad.Actions.Navigation2D 
@@ -38,10 +36,6 @@ import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Util.WorkspaceCompare (getSortByIndex)
 import XMonad.Hooks.RefocusLast (shiftRLWhen, isFloat)
-
--- import qualified XMonad.Layout.Decoration as XMonad.Layout.LayoutModifier
--- import Data.Maybe (fromJust)
-
 
 --------------------------------------
 -- Variables Initialization
@@ -89,10 +83,6 @@ myStartupHook = do
     spawnOnce "feh --bg-fill --randomize ~/.wallpapers/* &"  -- feh set random wallpaper
     spawnOnce "trayer --iconspacing 5 --edge top --align right --widthtype request --heighttype pixel --padding 5 --SetDockType true --SetPartialStrut false --expand true --monitor primary --transparent true --alpha 0 --tint 0x282c34  --height 22"
     setDefaultCursor xC_left_ptr -- Set cursor theme
-    -- setWMName "LG3D"
-    -- spawnOnce "canberra-gtk-play -i service-login -d 'Login' &" -- add a login sound
-    -- spawnOnce "nm-applet &"
-    -- spawnOnce "dunst &"
 
 
 --------------------------------------
@@ -105,17 +95,11 @@ oneBig = renamed[Replace "oneBig"] $ limitWindows 6 $ spacing 4 $ Mirror $ mkTog
 monocle = renamed[Replace "monocle"] $ limitWindows 20 Full
 floats = renamed [Replace "floats"] $ limitWindows 20 simplestFloat
 
+addKeys conf@(XConfig { modMask = modm }) = Map.fromList $
+    [((m .|. modm, k), windows $ onCurrentScreen f i)
+        | (i, k) <- zip (workspaces' conf) [xK_1 .. xK_9]
+        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
 
--- Custom keyBindings
-  -- TODO: Add ways to shrink or increase the vertical sizes of windows
-  -- TODO: Reset the layouts on the current workspace to default
-
-
--- workSpaceKeys :: [(String, X ())]
-
--- workSpaceKeys =  [("M-"++modKey2++keyChar, windows $ onCurrentScreen windowOperation workSpaceId)
---         | (workSpaceId, keyChar) <- zip myWorkspaces ["1","2","3","4","5","6","7","8","9"]
---         , (windowOperation, modKey2) <- [(W.greedyView, "0"), (W.shift, "S-")]]
 
 myKeys :: [(String, X ())]
 myKeys = [ 
@@ -126,6 +110,7 @@ myKeys = [
  ,("M-C-c", killAllOtherCopies)                                         -- Kill all the copies apart from the focused 
 
  -- Move between current and the last open windows
+ -- TODO: current and last open windows of the same screen
  ,("M-x", nextMatch History (return True))
  ,("M-z", toggleWS)
 
@@ -135,22 +120,6 @@ myKeys = [
  ,("M-o", rotUnfocusedDown)
  ,("M-c-i", rotFocusedUp)
  
- -- ,("M-h", windowGo L False)
- -- ,("M-k", windowGo U False)
- -- ,("M-j", windowGo D False)
- --
- -- Swap adjacent windows
- -- ,("M-S-l", windowSwap R False)
- -- ,("M-S-h", windowSwap L False)
- -- ,("M-S-k", windowSwap U False)
- -- ,("M-S-j", windowSwap D False)
-
- -- Resize windows
- -- ,("M-C-l", sendMessage (IncreaseRight 1))
- -- ,("M-C-h", sendMessage (IncreaseLeft 1))
- -- ,("M-C-k", sendMessage (IncreaseUp 1))
- -- ,("M-C-j", sendMessage (IncreaseDown 1))
-
  -- Directional navigation of screens
  ,("M-r", screenGo L False)
  ,("M-u", screenGo R False)
@@ -179,11 +148,6 @@ myKeys = [
  ,("M-p", spawn "rofi -show drun")                                     -- (Alt + p)
  ,("M-S-p", spawn "rofi -show window")                                   -- (Alt + x)
  ] 
- -- ++ [ (otherModMasks ++ "M-" ++ [key], action tag)
- --      | (tag, key)  <- zip myWorkspaces "123456789"
- --      , (otherModMasks, action) <- [("", windows . W.view) -- was W.greedyView
- --                                      , ("S-", windows . W.shift)]]
- --
 
 myLayoutHook = smartBorders $ T.toggleLayouts floats $
         mkToggle (NBFULL ?? NOBORDERS ?? EOT) myDefaultLayout
@@ -196,9 +160,10 @@ myLayoutHook = smartBorders $ T.toggleLayouts floats $
 
 myWorkspaces :: [String]
 myWorkspaces = ["  \x0031 ", "\x0032 ", "\x0033 ", "\x0034 ", "\x0035 ", "\x0036 ", "\x0037 ", "\x0038 ", "\x0039"]
+-- myWorkspaces = ["1", "2", "3", "4", "5"]
 
 ppLeft :: PP
--- ppRight :: PP
+ppRight :: PP
 ppLeft =  xmobarPP {ppCurrent = xmobarColor "#94e2d5" "" . wrap "<fn=1>" "</fn>"    -- Workspace that I am viewing now
       , ppVisible = xmobarColor "#98be65" "" . wrap "<fn=1>" "</fn>"              -- Workspace that is open on any monitor other than this one
       , ppHidden = xmobarColor "#2ac3de" "" . wrap "<fn=1>" "</fn>"               -- Hidden workspaces that have any open software in it but not open on any monitors
@@ -209,48 +174,25 @@ ppLeft =  xmobarPP {ppCurrent = xmobarColor "#94e2d5" "" . wrap "<fn=1>" "</fn>"
       , ppExtras  = [windowCount]                                     -- # of windows current workspace
       } 
 
--- , ppSort = getSortByIndex
+ppRight = xmobarPP{ppCurrent = xmobarColor "#94e2d5" "" . wrap "<fn=1>" "</fn>"    -- Workspace that I am viewing now
+      , ppVisible = xmobarColor "#98be65" "" . wrap "<fn=1>" "</fn>"              -- Workspace that is open on any monitor other than this one
+      , ppHidden = xmobarColor "#2ac3de" "" . wrap "<fn=1>" "</fn>"               -- Hidden workspaces that have any open software in it but not open on any monitors
+      , ppHiddenNoWindows = xmobarColor "#c0caf5" "" . wrap "<fn=1>" "</fn>"      -- Workspaces with no open softwares and not open on any monitors
+      , ppTitle = xmobarColor "#c0caf5" "" . shorten 15               -- Title of active window
+      , ppSep =  "<fc=#444b6a> | </fc>"                               -- Separator character
+      , ppUrgent = xmobarColor "#EBCB8B" "" . wrap "!<fn=1>" "</fn>!" -- Urgent workspace
+      , ppExtras  = [windowCount]                                     -- # of windows current workspace
+      }
 
 xmobarLeft :: StatusBarConfig
 xmobarRight :: StatusBarConfig
 xmobarLeft = statusBarPropTo "_XMONAD_LOG_1" "xmobar -x 0 $HOME/.config/xmonad/xmobar/xmobarrc0.hs" $ pure $ marshallPP 0 ppLeft
-xmobarRight = statusBarPropTo "_XMONAD_LOG_2" "xmobar -x 1 $HOME/.config/xmonad/xmobar/xmobarrc1.hs" $ pure $ marshallPP 1 ppLeft
+xmobarRight = statusBarPropTo "_XMONAD_LOG_2" "xmobar -x 1 $HOME/.config/xmonad/xmobar/xmobarrc1.hs" $ pure $ marshallPP 1 ppRight
 
 barSpawner :: ScreenId -> IO StatusBarConfig
 barSpawner 0 = pure xmobarLeft 
 barSpawner 1 = pure xmobarRight
 barSpawner _ = mempty -- nothing on the rest of the screens
-
-currentWorkspaces :: ([PhysicalWindowSpace] -> [PhysicalWindowSpace]) -> X [PhysicalWorkspace]
-currentWorkspaces pSort = do 
-    winset <- gets windowset
-    let ws    = pSort . W.workspaces $ winset
-        sc    = W.screen . W.current $ winset
-        wsOn  = workspacesOn sc ws
-    return $ map W.tag wsOn
-
-copyWindowTo :: Int -> X ()
-copyWindowTo j = do
-    sort <- getSortByIndex
-    wsID <- currentWorkspaces sort
-    windows $ copy $ wsID !! (j - 1)
-
-wsContainingCopies :: X [WorkspaceId]
-wsContainingCopies = do
-    ws <- gets windowset
-    let sc = W.screen . W.current $ ws
-    return $ copiesOfOn (W.peek ws) (taggedWindows $ workspaceHidden ws sc)
-  where
-    workspaceHidden ws sc = [ w | w <- W.hidden ws, sc == unmarshallS (W.tag w) ]
-
-withNthWorkspaceScreen :: (WorkspaceId -> WindowSet -> WindowSet) -> Int -> X ()
-withNthWorkspaceScreen job wnum = do
-    sort <- getSortByIndex
-    cws <- currentWorkspaces sort
-    let enoughWorkspaces = drop wnum cws
-    case enoughWorkspaces of
-         (w : _) -> windows $ job w
-         []      -> return ()
 
 manageZoomHook =
   composeAll $
@@ -282,14 +224,7 @@ main = do
          focusedBorderColor = myFocusedBorderColor,
          startupHook = myStartupHook,
          workspaces = withScreens nScreens myWorkspaces,
-         manageHook = manageZoomHook
+         manageHook = manageZoomHook,
+         keys = \c -> addKeys c `Map.union` keys def c
          } 
-        `additionalKeysP` myKeys
-
-
--- `additionalKeys` 
--- keyBindings conf = let modm = modMask conf in fromList $
---     {- lots of other keybindings -}
---     [((m .|. modm, k), windows $ onCurrentScreen f i)
---         | (i, k) <- zip (workspaces' conf) [xK_1 .. xK_9]
---         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+         `additionalKeysP` myKeys
