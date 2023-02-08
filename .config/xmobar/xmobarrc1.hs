@@ -3,8 +3,8 @@
 -- Font used : Fira Code, CaskaydiaCove Nerd Font for icons
 Config { font    = "xft:JetBrainsMonoMedium Nerd Font:weight=bold:pixelsize=12:antialias=true:hinting=true"
        -- , additionalFonts = [ "xft:JetBrainsMonoMedium Nerd Font:weight=book:pixelsize=12:antialias=true:hinting=true"]
-       , bgColor = "#2E3440"
-       , fgColor = "#f7768e"
+       , bgColor = "#11111b"
+       , fgColor = "#cdd6f4"
        , alpha = 254
        , position = TopSize L 100 24 
        , lowerOnStart = True
