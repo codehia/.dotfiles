@@ -237,7 +237,7 @@ myXmobarPP s =
     , ppUrgent = xmobarColor "#EBCB8B" "" . wrap "!<fn=1>" "</fn>!" -- Urgent workspace
     , ppTitle = const ""
     , ppLayout = const ""
-    , ppExtras = [ logLayoutOnScreen 0 , xmobarColorL "#EBCB8B" "" . padL . shortenL 15 $ logTitleOnScreen 0 ]
+    , ppExtras = [ logLayoutOnScreen s , xmobarColorL "#EBCB8B" "" . padL . shortenL 15 $ logTitleOnScreen s ]
     }
 
 myStatusBarSpawner :: Applicative f => ScreenId -> f StatusBarConfig
