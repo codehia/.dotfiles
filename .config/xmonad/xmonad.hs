@@ -8,7 +8,7 @@ import XMonad
         focusedBorderColor, keys, layoutHook, logHook, manageHook, modMask,
         normalBorderColor, startupHook, terminal, workspaces)
   , (.|.) , (|||) , sendMessage , shiftMask , spawn , windows , withFocused
-  , xC_left_ptr , xK_1 , xK_9 , xK_Super_L , xK_s , xK_w , xmonad
+  , xC_left_ptr , xK_1 , xK_9 , xK_Super_L , xK_s , xK_w , xmonad, XState (windowset), modify
   )
 
 import XMonad.Layout.GridVariants (Grid(Grid))
@@ -59,6 +59,7 @@ import XMonad.ManageHook
     ( (-->), (<&&>), (<+>), (=?), className, composeAll, doF, doFloat, title )
 import XMonad.Util.NamedScratchpad
     ( customFloating, namedScratchpadAction, namedScratchpadManageHook, nsHideOnFocusLoss, NamedScratchpad(NS) )
+import XMonad.Actions.OnScreen (onlyOnScreen)
 
 --------------------------------------
 -- Scratchpads
@@ -121,6 +122,7 @@ myBorderWidth = 4
 --------------------------------------
 myStartupHook :: X ()
 myStartupHook = do
+  modify $ \xstate -> xstate { windowset = onlyOnScreen 1 "1_1 " (windowset xstate) }
   spawnOnce "picom --experimental-backends &"
   spawnOnce "feh --bg-fill --randomize ~/.wallpapers/* &" -- feh set random wallpaper
   spawnOnce
