@@ -209,6 +209,7 @@ myKeys =
  -- Scratchpad Spawn
   , ("M-C-p", namedScratchpadAction myScratchpads "postman")
   , ("M-C-s", namedScratchpadAction myScratchpads "slack")
+  , ("M-q", spawn "xmonad --recompile; xmonad --restart")
   ]
 
 --------------------------------------
