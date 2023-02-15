@@ -8,8 +8,7 @@ import XMonad
         focusedBorderColor, keys, layoutHook, logHook, manageHook, modMask,
         normalBorderColor, startupHook, terminal, workspaces)
   , (.|.) , (|||) , sendMessage , shiftMask , spawn , windows , withFocused
-  , xC_left_ptr , xK_1 , xK_9 , xK_Super_L , xK_s , xK_w , xmonad, XState (windowset), modify
-  )
+  , xC_left_ptr , xK_1 , xK_9 , xK_Super_L , xK_s , xK_w , xmonad, XState (windowset), modify)
 
 import XMonad.Layout.GridVariants (Grid(Grid))
 import XMonad.Layout.LimitWindows (limitWindows)
@@ -46,8 +45,7 @@ import qualified Graphics.X11.Types
 import XMonad.Hooks.StatusBar ( StatusBarConfig , dynamicEasySBs , statusBarPropTo)
 import XMonad.Hooks.StatusBar.PP
   ( PP(ppCurrent, ppExtras, ppHidden, ppHiddenNoWindows, ppLayout, ppSep, ppTitle, ppUrgent, ppVisible)
-  , filterOutWsPP , wrap , xmobarColor , xmobarPP
-  )
+  , filterOutWsPP , wrap , xmobarColor)
 import XMonad.Layout.IndependentScreens
   ( VirtualWorkspace , countScreens , marshallPP , onCurrentScreen , withScreens , workspaces')
 import XMonad.Util.Cursor (setDefaultCursor)
@@ -66,21 +64,18 @@ import XMonad.Actions.OnScreen (onlyOnScreen)
 --------------------------------------
 myScratchpads :: [NamedScratchpad]
 myScratchpads =
-  [ NS "postman" spawnPostman findPostman managePostman
-  , NS "slack" spawnSlack findSlack manageSlack
+  [ NS "postman" spawnPostman findPostman manageFloating
+  , NS "slack" spawnSlack findSlack manageFloating
+  , NS "signal" spawnSignal findSignal manageFloating
   ]
   where
     spawnPostman = "postman"
     findPostman = className =? "Postman"
-    managePostman = customFloating $ W.RationalRect l t w h
-      where
-        h = 0.9
-        w = 0.9
-        t = 0.95 - h
-        l = 0.95 - w
     spawnSlack = "slack"
     findSlack = className =? "Slack"
-    manageSlack = customFloating $ W.RationalRect l t w h
+    spawnSignal = "signal-desktop"
+    findSignal = className =? "Signal"
+    manageFloating = customFloating $ W.RationalRect l t w h
       where
         h = 0.9
         w = 0.9
@@ -125,7 +120,7 @@ myStartupHook = do
   modify $ \xstate -> xstate { windowset = onlyOnScreen 1 "1_1 " (windowset xstate) }
   spawnOnce "picom --experimental-backends &"
   spawnOnce "feh --bg-fill --randomize ~/.wallpapers/* &" -- feh set random wallpaper
-  spawnOnce
+  spawn
     "trayer --iconspacing 5 --edge top --align right --widthtype request --heighttype pixel --padding 5 --SetDockType true --SetPartialStrut false --expand true --monitor primary --transparent true --alpha 0 --tint 0x282c34  --height 22"
   setDefaultCursor xC_left_ptr -- Set cursor theme
 
@@ -209,7 +204,8 @@ myKeys =
  -- Scratchpad Spawn
   , ("M-C-p", namedScratchpadAction myScratchpads "postman")
   , ("M-C-s", namedScratchpadAction myScratchpads "slack")
-  , ("M-q", spawn "xmonad --recompile; xmonad --restart")
+  , ("M-C-g", namedScratchpadAction myScratchpads "signal")
+  , ("M-q", spawn "xmonad --recompile; pkill trayer; xmonad --restart")
   ]
 
 --------------------------------------
