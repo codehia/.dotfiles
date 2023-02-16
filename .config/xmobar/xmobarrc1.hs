@@ -13,7 +13,7 @@ Config { font    = "xft:JetBrainsMonoMedium Nerd Font:weight=bold:pixelsize=12:a
        , persistent = True
        -- , iconRoot = ".config/xmonad/xpm/"
        , overrideRedirect = True
-       , commands = [ Run XPropertyLog "_XMONAD_LOG_2"
+       , commands = [ Run XPropertyLog "_XMONAD_LOG_1"
                       -- Time and date -- 30 seconds
                     , Run Date "<fc=#81A1C1><fc=#D8DEE9>%I:%M %p</fc> %a %_d %b %Y</fc>" "date" 300
                       -- Disk space free -- 30 minute 
@@ -38,5 +38,5 @@ Config { font    = "xft:JetBrainsMonoMedium Nerd Font:weight=bold:pixelsize=12:a
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%_XMONAD_LOG_2% }<box width=4 color=#00BCD4 type=Bottom>%date%</box>{ <box width=4 color=#673AB7 ml=2 type=Bottom>%disku%</box> <action=`kitty -e htop`>%memory%</action> %cpu% <fc=#D08770><fn=1> </fn>%uname% %checkupdate%</fc> %dynnetwork%"
+       , template = "%_XMONAD_LOG_1% }<box width=4 color=#00BCD4 type=Bottom>%date%</box>{ <box width=4 color=#673AB7 ml=2 type=Bottom>%disku%</box> <action=`kitty -e htop`>%memory%</action> %cpu% <fc=#D08770><fn=1> </fn>%uname% %checkupdate%</fc> %dynnetwork%"
        
