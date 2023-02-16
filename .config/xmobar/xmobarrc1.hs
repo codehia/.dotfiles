@@ -38,5 +38,5 @@ Config { font    = "xft:JetBrainsMonoMedium Nerd Font:weight=bold:pixelsize=12:a
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%_XMONAD_LOG_1% }<box width=4 color=#00BCD4 type=Bottom>%date%</box>{ <box width=4 color=#673AB7 ml=2 type=Bottom>%disku%</box> <action=`kitty -e htop`>%memory%</action> %cpu% <fc=#D08770><fn=1> </fn>%uname% %checkupdate%</fc> %dynnetwork%"
+       , template = "<fn=1>   </fn>%_XMONAD_LOG_1% }<box width=4 color=#00BCD4 type=Bottom>%date%</box>{ <box width=4 color=#673AB7 ml=2 type=Bottom>%disku%</box> <action=`kitty -e htop`>%memory%</action> %cpu% <fc=#D08770><fn=1> </fn>%uname% %checkupdate%</fc> %dynnetwork%"
        
