@@ -67,6 +67,7 @@ myScratchpads =
   [ NS "postman" spawnPostman findPostman manageFloating
   , NS "slack" spawnSlack findSlack manageFloating
   , NS "signal" spawnSignal findSignal manageFloating
+  , NS "ym" spawnYM findYM manageFloating
   ]
   where
     spawnPostman = "postman"
@@ -75,6 +76,8 @@ myScratchpads =
     findSlack = className =? "Slack"
     spawnSignal = "signal-desktop"
     findSignal = className =? "Signal"
+    spawnYM = "youtube-music"
+    findYM = className =? "YouTube Music"
     manageFloating = customFloating $ W.RationalRect l t w h
       where
         h = 0.9
@@ -145,9 +148,7 @@ oneBig =
   mkToggle (single REFLECTY) $ OneBig (5 / 9) (8 / 12)
 
 monocle = renamed [Replace "monocle"] $ limitWindows 20 Full
-
 floats = renamed [Replace "floats"] $ limitWindows 20 simplestFloat
-
 myLayoutHook =
   smartBorders $
   T.toggleLayouts floats $ mkToggle (NBFULL ?? NOBORDERS ?? EOT) myDefaultLayout
@@ -205,7 +206,8 @@ myKeys =
   , ("M-C-p", namedScratchpadAction myScratchpads "postman")
   , ("M-C-s", namedScratchpadAction myScratchpads "slack")
   , ("M-C-g", namedScratchpadAction myScratchpads "signal")
-  , ("M-q", spawn "xmonad --recompile; pkill trayer; xmonad --restart")
+  , ("M-C-y", namedScratchpadAction myScratchpads "ym")
+  , ("M-q", spawn "xmonad --recompile; xmonad --restart")
   ]
 
 --------------------------------------
