@@ -116,11 +116,7 @@ ZSH_AUTOSUGGEST_HISTORY_IGNORE='rm*|mkdir*|mv*|unzip*|zip*|cp*|unrar*'
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
-
-# fnm
-export PATH=/home/deus/.fnm:$PATH
 export GOPATH=$HOME/projects/go
-eval "`fnm env`"
 
 [ -f "/home/deus/.ghcup/env" ] && source "/home/deus/.ghcup/env" # ghcup-env
 export BAT_THEME="Catppuccin-mocha"
@@ -129,3 +125,8 @@ export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
 --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+
+# fnm
+export PATH="/home/deus/.local/share/fnm:$PATH"
+eval "`fnm env`"
+export PATH=$PATH:/home/deus/.spicetify

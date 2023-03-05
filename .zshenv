@@ -7,14 +7,16 @@
 # environment variables in ~/.zshenv, do it where indicated by comments below.
 
 if [ -n "${ZSH_VERSION-}" ]; then
+  export EDITOR=nvim
+  export VISUAL=nvim
+  export XDG_CACHE_HOME=$HOME/.cache
+  export XDG_CONFIG_HOME=$HOME/.config
+  export XDG_DATA_HOME=$HOME/.local/share
+  export XDG_STATE_HOME=$HOME/.local/state
+  export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
   # If you are certain that you must export some environment variables
   # in ~/.zshenv (see comments at the top!), do it here:
-	export EDITOR="nvim"
-	export VISUAL="nvim"
-  #   export GOPATH=$HOME/go
-  #
   # Do not change anything else in this file.
-
   : ${ZDOTDIR:=~}
   setopt no_global_rcs
   [[ -o no_interactive && -z "${Z4H_BOOTSTRAPPING-}" ]] && return
