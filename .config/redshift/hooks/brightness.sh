@@ -4,8 +4,8 @@
 # Set brightness values for each status.
 # Range from 1 to 100 is valid
 brightness_day=100
-brightness_transition=50
-brightness_night=20
+brightness_transition=80
+brightness_night=60
 # Set fps for smoooooth transition
 fps=1000
 # Adjust this grep to filter only the backlights you want to adjust
