@@ -1,0 +1,41 @@
+(defcfg
+  input  (device-file "/dev/input/by-id/usb-Keychron_Keychron_K8_Pro-event-kbd")
+  output (uinput-sink "My KMonad output")
+  cmp-seq ralt
+  fallthrough true
+  allow-cmd true
+)
+
+(defalias
+  escctrl (tap-hold-next-release 200 esc lctl)
+  enterctrl (tap-hold-next-release 200 ret rctl)
+  tabalt (tap-hold-next-release 200 tab lalt)
+  bslashalt (tap-hold-next-release 200 \ ralt)
+  spcnav  (tap-hold-next-release 200 spc (layer-toggle navigation))
+  altsft (tap-hold-next-release 200 q (around lalt lsft))
+  altctl (tap-hold-next-release 200 ] (around lctl lalt))
+)
+
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet cmp  rctl
+)
+
+(deflayer custom
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  @tabalt  @altsft    w    e    r    t    y    u    i    o    p    [    @altctl    @bslashalt
+  @escctrl a  s    d    f    g    h    j    k   l    ;    '    @enterctrl
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt   @spcnav     ralt rmet cmp  rctl
+)
+
+(deflayer navigation
+  _  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _ home pgup del end pgdn left down up  right   _    _    _
+  _ _    _    _    _    _    _    _    _    _    _    _
+  _ _ _         _             _ _ _  _
+)
