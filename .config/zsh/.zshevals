@@ -1,9 +1,0 @@
-evals ()
-{
-  eval "`fnm env`"
-  eval "$(pyenv init --path)"
-  [ -f "/home/deus/.ghcup/env" ] && source "/home/deus/.ghcup/env" # ghcup-env
-  eval "$(pyenv virtualenv-init -)"
-  eval "$(~/.rbenv/bin/rbenv init - zsh)"
-  eval "$(rbenv init - zsh)"
-}
