@@ -35,17 +35,17 @@ bindkey '5~' kill-word
 
 alias tree='tree -a -I .git'
 alias update='sudo pacman -Syyu'
-alias yupdate='yay -Syyu'
+alias yupdate='paru -Syyu'
 alias dotfiles='$(which git) --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias install='sudo pacman -S'
 alias uninstall='sudo pacman -Rns'
-alias yinstall='yay -S'
-alias yuninstall='yay -Rnsu'
+alias yinstall='paru -S'
+alias yuninstall='paru -Rnsu'
 alias fb='tmuxp load fjapi'
 alias fbf='tmuxp load fjfull'
-alias lst='exa -T'
+alias lst='eza -T'
 alias copy='pwd | tr -d "\r\n" | pbcopy'
 
 setopt glob_dots     # no special treatment for file names with a leading dot
@@ -81,8 +81,8 @@ source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
 [ -f "/home/deus/.ghcup/env" ] && source "/home/deus/.ghcup/env" # ghcup-env
-_evalcache fnm env
-_evalcache pyenv init --path
-
+#_evalcache fnm env
+#_evalcache pyenv init --path
+#
 # bun completions
-[ -s "/home/deus/.bun/_bun" ] && source "/home/deus/.bun/_bun"
+# [ -s "/home/deus/.bun/_bun" ] && source "/home/deus/.bun/_bun"
