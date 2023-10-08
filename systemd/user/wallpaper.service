@@ -1,0 +1,7 @@
+[Unit]
+Description=Service File to change wallpaper based on wallpaper timer
+
+[Service]
+Type=oneshot
+Environment=DISPLAY=:0
+ExecStart=/bin/bash -c '/usr/bin/feh --bg-fill --randomize /home/deus/.wallpapers/*'
