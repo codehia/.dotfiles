@@ -81,8 +81,12 @@ source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
 [ -f "/home/deus/.ghcup/env" ] && source "/home/deus/.ghcup/env" # ghcup-env
-#_evalcache fnm env
-#_evalcache pyenv init --path
-#
-# bun completions
-# [ -s "/home/deus/.bun/_bun" ] && source "/home/deus/.bun/_bun"
+
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv virtualenv-init -)"
+
+# fnm
+export PATH="/home/deus/.local/share/fnm:$PATH"
+eval "`fnm env`"
+eval "$(fnm env --use-on-cd)"
