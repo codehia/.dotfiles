@@ -121,10 +121,10 @@ myBorderWidth = 4
 myStartupHook :: X ()
 myStartupHook = do
   modify $ \xstate -> xstate { windowset = onlyOnScreen 1 "1_1 " (windowset xstate) }
-  spawnOnce "picom --experimental-backends &"
+  spawnOnce "autorandr --change &" -- autorandr set monitor layout
+  spawnOnce "picom &"
   spawnOnce "feh --bg-fill --randomize ~/.wallpapers/* &" -- feh set random wallpaper
-  spawn
-    "trayer --iconspacing 5 --edge top --align right --widthtype request --heighttype pixel --padding 5 --SetDockType true --SetPartialStrut false --expand true --monitor primary --transparent true --alpha 0 --tint 0x282c34  --height 22"
+  spawn "trayer --iconspacing 5 --edge top --align right --distance 4,4 --distancefrom top,right --widthtype request --heighttype pixel --padding 5 --SetDockType true --SetPartialStrut false --expand true --monitor primary --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
   setDefaultCursor xC_left_ptr -- Set cursor theme
 
 --------------------------------------
@@ -202,6 +202,9 @@ myKeys =
   , ("M-f", spawn myFileManager) -- (Alt + f)
   , ("M-p", spawn "rofi -show drun") -- (Alt + p)
   , ("M-S-p", spawn "rofi -show window") -- (Alt + x)
+  , ("M-S-b", spawn "rofi-bluetooth")
+  , ("M-S-w", spawn "rofi-wifi-menu")
+  , ("M-S-y", spawn "clipmenu")
  -- Scratchpad Spawn
   , ("M-C-p", namedScratchpadAction myScratchpads "postman")
   , ("M-C-s", namedScratchpadAction myScratchpads "slack")
