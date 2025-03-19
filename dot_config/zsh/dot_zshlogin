@@ -1,0 +1,2 @@
+# will be loaded in login shells after .zshrc. 
+# will compile zcompdump in background as this is time-consuming and done only once per log-in session.
