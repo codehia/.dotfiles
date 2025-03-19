@@ -1,0 +1,10 @@
+font-family = ""
+font-family = "JetBrainsMono Nerd Font Mono"
+font-size = 14
+adjust-cell-height = 20%
+shell-integration-features = no-cursor
+cursor-style = "block"
+title = ""
+theme = "catppuccin-mocha"
+window-padding-balance = true
+window-decoration = false
