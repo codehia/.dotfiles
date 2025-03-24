@@ -1,5 +1,3 @@
-@theme "catppuccin-default"
-
 configuration{
     modi: "run,drun,window";
     icon-theme: "Papirus";
@@ -15,3 +13,5 @@ configuration{
     display-Network: " 󰤨  Network";
     sidebar-mode: true;
 }
+
+@theme "catppuccin-mocha"
