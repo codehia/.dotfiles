@@ -1,4 +1,4 @@
-Config { font    = "xft:JetBrainsMonoExtraBold Nerd Font:pixelsize=10:antialias=true:hinting=true"
+Config { font    = "xft:JetBrainsMono Nerd Font:pixelsize=10:antialias=true:hinting=true"
        , bgColor = "#11111b"
        , fgColor = "#cdd6f4"
        , alpha = 255
@@ -19,7 +19,7 @@ Config { font    = "xft:JetBrainsMonoExtraBold Nerd Font:pixelsize=10:antialias=
                                               , "-l", "#FF0000" ] 1200                                          -- Wireless Interface -- 2 minute 
                     , Run Com ".local/bin/trayer-padding-icon.sh" ["panel"] "trayerpad" 50                      -- Shift all icons to the left to accomodate system tray -- 5 seconds
 		                , Run Battery ["--template", "<fc=#cba6f7><acstatus></fc>"
-                                   , "-S", "On", "-d", "0", "-m", "2" --suffix false(default), --ddigits 0 decimal places to show, --minWidth 2 characters(can be padded with -c/--padchars string)
+                                   , "-S", "󰁹 ", "-d", "0", "-m", "2" --suffix false(default), --ddigits 0 decimal places to show, --minWidth 2 characters(can be padded with -c/--padchars string)
                                    , "-L", "20", "-H", "80", "-p", "3" --Low , --High, --ppad pads percentage values with 3 characters
                                    , "-W", "0" --bwidth total number of characters used to draw bars (default 10)
                                    , "-f", "󰂎󰁺󰁻󰁼󰁽󰁾󰁿󰂀󰂁󰂂󰁹" -- Choose icon for leftbar depending on battery remaining --bfore characters used to draw bars (cyclically)
@@ -34,5 +34,5 @@ Config { font    = "xft:JetBrainsMonoExtraBold Nerd Font:pixelsize=10:antialias=
         ]
        , sepChar = "%"
        , alignSep = "}{"
-     , template = "<fn=1>   </fn>%_XMONAD_LOG_0%}%date%{ <fc=#D08770><fn=1> </fn>%checkupdate%</fc> %wlp3s0wi% %trayerpad%"
+     , template = "<fn=1> 󰣛 </fn>%_XMONAD_LOG_0%}%date%{ %battery% %wlp3s0wi% %trayerpad%"
 }
