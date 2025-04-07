@@ -298,7 +298,7 @@ myKeys =
     ("M-C-s", namedScratchpadAction myScratchpads "slack"),
     ("M-C-g", namedScratchpadAction myScratchpads "signal"),
     ("M-C-y", namedScratchpadAction myScratchpads "ym"),
-    ("M-q", spawn "pkill trayer; xmonad --recompile; xmonad --restart")
+    ("M-q", spawn "xmonad --recompile; xmonad --restart")
   ]
 
 --------------------------------------
