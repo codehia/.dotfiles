@@ -9,3 +9,4 @@
 */zsh/.zsh_plugins.zsh
 */lazygit/state.yml
 */tmux/plugins
+*/systemd/user/default.target.wants/
