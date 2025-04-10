@@ -88,8 +88,8 @@ export FZF_CTRL_R_OPTS="
 
 
 
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/shell/key-bindings.zsh
+source /usr/share/fzf/shell/completion.zsh
 
 [ -f "/home/deus/.ghcup/env" ] && source "/home/deus/.ghcup/env" # ghcup-env
 

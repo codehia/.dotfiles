@@ -9,7 +9,7 @@ return {
         markdown = { 'markdownlint' },
         python = { 'flake8' },
         bash = { 'shellcheck' },
-        sql = { 'sqlfluff' },
+        -- sql = { 'sqlfluff' },
         haskell = { 'hlint' },
         go = { 'golangcilint' },
         rust = { 'cargo', 'clippy' },
