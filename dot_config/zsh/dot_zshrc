@@ -69,7 +69,6 @@ export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
 export PATH="$HOME/.pyenv/bin:$PATH"
 export PATH="/home/deus/.local/share/fnm:$PATH"
-export BAT_THEME="Catppuccin-mocha"
 export BUN_INSTALL="$HOME/.bun" 
 export PATH="$BUN_INSTALL/bin:$PATH" 
 export FZF_DEFAULT_OPTS=" \
