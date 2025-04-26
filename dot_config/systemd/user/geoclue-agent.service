@@ -1,0 +1,11 @@
+[Unit]
+Description=redshift needs to get a (geo)clue
+Wants=network-online.target
+After=network-online.target
+Before=redshift.service
+
+[Service]
+ExecStart=/usr/lib/geoclue-2.0/demos/agent
+
+[Install]
+WantedBy=default.target

@@ -3,6 +3,9 @@
 --------------------------------------
 --
 
+import Custom.MyCatppuccin
+import Custom.MyDecorations (myBorderWidth, myFocusedBorderColor, myNormalBorderColor)
+import Custom.MyScratchpads (myScratchpads)
 import qualified Data.Map as Map
 import qualified Graphics.X11.Types
 import XMonad
@@ -135,28 +138,28 @@ import XMonad.Util.SpawnOnce (spawnOnce)
 --------------------------------------
 -- Scratchpads
 --------------------------------------
-myScratchpads :: [NamedScratchpad]
-myScratchpads =
-  [ NS "postman" spawnPostman findPostman manageFloating,
-    NS "slack" spawnSlack findSlack manageFloating,
-    NS "signal" spawnSignal findSignal manageFloating,
-    NS "ym" spawnYM findYM manageFloating
-  ]
-  where
-    spawnPostman = "postman"
-    findPostman = className =? "Postman"
-    spawnSlack = "slack"
-    findSlack = className =? "Slack"
-    spawnSignal = "signal-desktop"
-    findSignal = className =? "Signal"
-    spawnYM = "youtube-music"
-    findYM = className =? "YouTube Music"
-    manageFloating = customFloating $ W.RationalRect l t w h
-      where
-        h = 0.9
-        w = 0.9
-        t = 0.95 - h
-        l = 0.95 - w
+-- myScratchpads :: [NamedScratchpad]
+-- myScratchpads =
+--   [ NS "postman" spawnPostman findPostman manageFloating,
+--     NS "slack" spawnSlack findSlack manageFloating,
+--     NS "signal" spawnSignal findSignal manageFloating,
+--     NS "ym" spawnYM findYM manageFloating
+--   ]
+--   where
+--     spawnPostman = "postman"
+--     findPostman = className =? "Postman"
+--     spawnSlack = "slack"
+--     findSlack = className =? "Slack"
+--     spawnSignal = "signal-desktop"
+--     findSignal = className =? "Signal"
+--     spawnYM = "youtube-music"
+--     findYM = className =? "YouTube Music"
+--     manageFloating = customFloating $ W.RationalRect l t w h
+--       where
+--         h = 0.9
+--         w = 0.9
+--         t = 0.95 - h
+--         l = 0.95 - w
 
 --------------------------------------
 -- Variables Initialization
@@ -165,28 +168,19 @@ myTerminal :: String
 myTerminal = "ghostty"
 
 myBrowser :: String
-myBrowser = "brave"
+myBrowser = "brave-browser"
 
 myFileManager :: String
 myFileManager = "thunar"
 
 myEditor :: String
-myEditor = myTerminal ++ "-e nvim"
-
-myNormalBorderColor :: String
-myNormalBorderColor = "#f6f4f3"
-
-myFocusedBorderColor :: String
-myFocusedBorderColor = "#890620"
+myEditor = myTerminal ++ " -e nvim"
 
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = False
 
 myClickJustFocuses :: Bool
 myClickJustFocuses = False
-
-myBorderWidth :: Dimension
-myBorderWidth = 4
 
 --------------------------------------
 -- Autostart
@@ -298,6 +292,8 @@ myKeys =
     ("M-C-s", namedScratchpadAction myScratchpads "slack"),
     ("M-C-g", namedScratchpadAction myScratchpads "signal"),
     ("M-C-y", namedScratchpadAction myScratchpads "ym"),
+    ("M-C-t", namedScratchpadAction myScratchpads "kitty"),
+    ("M-C-m", namedScratchpadAction myScratchpads "telegram"),
     ("M-q", spawn "xmonad --recompile; xmonad --restart")
   ]
 
