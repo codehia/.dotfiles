@@ -50,6 +50,7 @@ return { -- Autoformat
       go = { 'gofmt' },
       haskell = { 'ormolu' },
       javascript = { 'prettierd', 'prettier' },
+      typescript = { 'prettierd', 'prettier' },
       yaml = { 'yamlfix', args = { '--in-place', '--quiet' } },
       rust = { 'rustfmt', lsp_format = 'fallback' },
       elixir = { 'mix format' },

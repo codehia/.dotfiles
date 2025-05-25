@@ -10,3 +10,5 @@
 */lazygit/state.yml
 */tmux/plugins
 */systemd/user/default.target.wants/
+*/nvim/.git/
+*/nvim/.gitignore
