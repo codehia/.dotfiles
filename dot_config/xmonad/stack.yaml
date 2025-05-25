@@ -1,4 +1,4 @@
 ---
 snapshot:
-  url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/22/43.yaml
+  url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/23/23.yaml
 packages: [xmonad, xmonad-contrib, .]

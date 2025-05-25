@@ -294,6 +294,7 @@ myKeys =
     ("M-C-y", namedScratchpadAction myScratchpads "ym"),
     ("M-C-t", namedScratchpadAction myScratchpads "kitty"),
     ("M-C-m", namedScratchpadAction myScratchpads "telegram"),
+    ("M-C-o", namedScratchpadAction myScratchpads "spotify"),
     ("M-q", spawn "xmonad --recompile; xmonad --restart")
   ]
 

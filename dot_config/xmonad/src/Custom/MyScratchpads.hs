@@ -12,21 +12,25 @@ myScratchpads =
     NS "signal" spawnSignal findSignal manageFloating,
     NS "ym" spawnYM findYM manageFloating,
     NS "kitty" spawnKitty findKitty manageFloating,
-    NS "telegram" spawnTelegram findTelegram manageFloating
+    NS "telegram" spawnTelegram findTelegram manageFloating,
+    NS "spotify" spawnSpotify findSpotify manageFloating
   ]
   where
     spawnPostman = "postman"
     findPostman = className =? "Postman"
     spawnSlack = "slack"
     findSlack = className =? "Slack"
-    spawnSignal = "signal-desktop"
+    spawnSignal = "flatpak run org.signal.Signal"
     findSignal = className =? "Signal"
-    spawnTelegram = "telegram-desktop"
+    spawnTelegram = "flatpak run org.telegram.desktop"
     findTelegram = className =? "TelegramDesktop"
     spawnYM = "youtube-music"
     findYM = className =? "YouTube Music"
     spawnKitty = "kitty"
     findKitty = className =? "kitty"
+    spawnSpotify = "flatpak run com.spotify.Client"
+    findSpotify = className =? "Spotify"
+
 
 {-
 To get WM_CLASS of a visible window, run "xprop | grep 'CLASS'" and select the window.
