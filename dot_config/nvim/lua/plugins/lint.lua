@@ -12,7 +12,7 @@ return {
         -- sql = { 'sqlfluff' },
         haskell = { 'hlint' },
         go = { 'golangcilint' },
-        rust = { 'cargo', 'clippy' },
+        rust = {},
         elixir = { 'mix' },
         typescript = { 'eslint_d' },
         javascript = { 'eslint_d' },
