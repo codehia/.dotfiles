@@ -1,3 +1,2 @@
 ## README:
-My .dotfiles managed by chezmoi
-
+post-commit is in `.githooks` run `git config core.hooksPath .githooks` command the first time after cloning to maintain the mirror-repo upto date
